@@ -1,6 +1,7 @@
 # zuul
 
-FIXME
+A ghostbusters reference to Zuul, the gatekeeper. Zuul is a microservice focus on authentication, session management, and authorization.
+
 
 ## Prerequisites
 
@@ -16,4 +17,4 @@ To start a web server for the application, run:
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Jared Holmberg
