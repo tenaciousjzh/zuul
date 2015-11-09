@@ -10,6 +10,8 @@
             [selmer.parser :as parser]
             [environ.core :refer [env]]))
 
+;TODO - Add component startup here
+
 (defn init
   "init will be called once when
    app is deployed as a servlet on
