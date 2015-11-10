@@ -6,3 +6,15 @@ CREATE TABLE tokens (
        expires TIMESTAMP,
        CONSTRAINT unique_token UNIQUE (token)
 );
+
+--;;
+
+CREATE INDEX tokens_token_idx ON tokens(token);
+
+--;;
+
+CREATE INDEX tokens_user_name_idx ON tokens(user_name);
+
+--;;
+
+CREATE INDEX tokens_expires_idx ON tokens(expires);

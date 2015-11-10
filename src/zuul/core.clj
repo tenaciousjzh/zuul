@@ -2,6 +2,7 @@
   (:require [zuul.handler :refer [app init destroy]]
             [immutant.web :as immutant]
             [zuul.db.migrations :as migrations]
+            [zuul.db.core :as db]
             [clojure.tools.nrepl.server :as nrepl]
             [taoensso.timbre :as timbre]
             [environ.core :refer [env]])
@@ -52,6 +53,7 @@
 
 (defn stop-app []
   (stop-nrepl)
+  (db/disconnect! )
   (stop-http-server)
   (shutdown-agents))
 
@@ -59,10 +61,11 @@
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop-app))
   (start-nrepl)
   (start-http-server (http-port port))
-  (timbre/info "server started on port:" (:port @http-server)))
+  (timbre/info "server started on port:" (:port @http-server))
+  (db/connect! )
+  (timbre/info "connected to database: " @db/*conn*))
 
 (defn -main [& args]
   (cond
     (some #{"migrate" "rollback"} args) (migrations/migrate args)
     :else (start-app args)))
-  

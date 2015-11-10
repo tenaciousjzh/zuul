@@ -54,3 +54,15 @@ WHERE id = :id
 -- deletes a session token
 DELETE FROM tokens
 WHERE id = :id
+
+-- name: get-token
+-- gets the token given the right user name
+SELECT * FROM tokens
+WHERE user_name = :user_name
+      AND max(expires) > current_timestamp
+
+-- name: get-user-by-token
+-- gets the user associated with the token
+SELECT u.* FROM tokens t
+JOIN users u ON u.user_name = t.user_name
+WHERE t.token = :token
